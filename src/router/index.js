@@ -74,7 +74,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'rolelist',
-        component: (resolve) => require(['@/views/rolemanagement/rolelist/index'], resolve),
+        component: (resolve) => require(['@/views/roleMgt/rolelist/index'], resolve),
         name: '角色列表',
         meta: { title: '角色列表', icon: 'user', noCache: true, affix: true }
       }

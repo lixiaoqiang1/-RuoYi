@@ -59,12 +59,13 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(this.$el, 'macarons')
+      
       this.setOptions(this.chartData)
     },
-    setOptions({ expectedData, actualData } = {}) {
+    setOptions(val) {
       this.chart.setOption({
         xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: val.data[0].label,
           boundaryGap: false,
           axisTick: {
             show: false
@@ -90,26 +91,31 @@ export default {
           }
         },
         legend: {
-          data: ['expected', 'actual']
+          data: [
+            // 'expected',
+            //  '活跃人数趋势'
+          ]
         },
-        series: [{
-          name: 'expected', itemStyle: {
-            normal: {
-              color: '#FF005A',
-              lineStyle: {
-                color: '#FF005A',
-                width: 2
-              }
-            }
-          },
-          smooth: true,
-          type: 'line',
-          data: expectedData,
-          animationDuration: 2800,
-          animationEasing: 'cubicInOut'
-        },
+        series: [
+        // {
+        //   name: 'expected', 
+        //   itemStyle: {
+        //     normal: {
+        //       color: '#FF005A',
+        //       lineStyle: {
+        //         color: '#FF005A',
+        //         width: 2
+        //       }
+        //     }
+        //   },
+        //   smooth: true,
+        //   type: 'line',
+        //   data: val.data[0].value,
+        //   animationDuration: 2800,
+        //   animationEasing: 'cubicInOut'
+        // },
         {
-          name: 'actual',
+          name: '活跃人数趋势',
           smooth: true,
           type: 'line',
           itemStyle: {
@@ -124,7 +130,7 @@ export default {
               }
             }
           },
-          data: actualData,
+          data: val.data[0].value,
           animationDuration: 2800,
           animationEasing: 'quadraticOut'
         }]
