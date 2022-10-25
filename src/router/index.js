@@ -61,83 +61,117 @@ export const constantRoutes = [
       {
         path: 'index',
         component: (resolve) => require(['@/views/index'], resolve),
-        name: '首页',
-        meta: { title: '首页', icon: 'dashboard', noCache: true, affix: true }
-      }
-    ]
-  },
-  {
-    path: '/rolelist',
-    component: Layout,
-    hidden: true,
-    redirect: 'rolelist',
-    children: [
+        name: '工作台',
+        meta: { title: '工作台', icon: 'dashboard', noCache: true, affix: true }
+      },
       {
-        path: 'rolelist',
-        component: (resolve) => require(['@/views/roleMgt/rolelist/index'], resolve),
-        name: '角色列表',
-        meta: { title: '角色列表', icon: 'user', noCache: true, affix: true }
+        path: 'replyMgts',
+        component: (resolve) => require(['@/views/replyMgt/index'], resolve),
+        name: '回复建议',
+        hidden: true,
+        meta: { title: '回复建议', icon: 'user', noCache: true, affix: true }
       }
     ]
-  },
-  {
-    path: '/user',
-    component: Layout,
-    // hidden: true,
-    redirect: 'noredirect',
-    children: [
-      {
-        path: 'profile',
-        component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
-        name: 'Profile',
-        meta: { title: '个人中心', icon: 'user' }
-      }
-    ]
-  },
-  {
-    path: '/dict',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'type/data/:dictId(\\d+)',
-        component: (resolve) => require(['@/views/system/dict/data'], resolve),
-        name: 'Data',
-        meta: { title: '字典数据', icon: '' }
-      }
-    ]
-  },
-  {
-    path: '/job',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'log',
-        component: (resolve) => require(['@/views/monitor/job/log'], resolve),
-        name: 'JobLog',
-        meta: { title: '调度日志' }
-      }
-    ]
-  },
-  {
-    path: '/gen',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: 'edit/:tableId(\\d+)',
-        component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
-        name: 'GenEdit',
-        meta: { title: '修改生成配置' }
-      }
-    ]
-  }
+  },  
+  // {
+  //   path: '/messagebox',
+  //   component: Layout,
+  //   redirect: 'messagebox',
+  //   children: [
+  //     {
+  //       path: 'messagebox',
+  //       component: (resolve) => require(['@/views/messagebox/index'], resolve),
+  //       name: '通知',
+  //       meta: { title: '通知', icon: 'dashboard', noCache: true, affix: true }
+  //     },
+  //   ]
+  // },
+  // {
+  //   path: '/replyMgt',
+  //   component: Layout,
+  //   // hidden: false,
+  //   redirect: 'replyMgt',
+  //   children: [
+  //     {
+  //       path: 'replyMgts',
+  //       component: (resolve) => require(['@/views/replyMgt/index'], resolve),
+  //       name: '回复建议',
+  //       meta: { title: '回复建议', icon: 'user', noCache: true, affix: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/rolelist',
+  //   component: Layout,
+  //   hidden: true,
+  //   redirect: 'rolelist',
+  //   children: [
+  //     {
+  //       path: 'rolelist',
+  //       component: (resolve) => require(['@/views/roleMgt/rolelist/index'], resolve),
+  //       name: '角色列表',
+  //       meta: { title: '角色列表', icon: 'user', noCache: true, affix: true }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/user',
+  //   component: Layout,
+  //   // hidden: true,
+  //   redirect: 'noredirect',
+  //   children: [
+  //     {
+  //       path: 'profile',
+  //       component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
+  //       name: 'Profile',
+  //       meta: { title: '个人中心', icon: 'user' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/dict',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'type/data/:dictId(\\d+)',
+  //       component: (resolve) => require(['@/views/system/dict/data'], resolve),
+  //       name: 'Data',
+  //       meta: { title: '字典数据', icon: '' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/job',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'log',
+  //       component: (resolve) => require(['@/views/monitor/job/log'], resolve),
+  //       name: 'JobLog',
+  //       meta: { title: '调度日志' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/gen',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: 'edit/:tableId(\\d+)',
+  //       component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
+  //       name: 'GenEdit',
+  //       meta: { title: '修改生成配置' }
+  //     }
+  //   ]
+  // }
   
 ]
 
 export default new Router({
-  mode: 'history', // 去掉url中的#
+  mode: 'hash', // 去掉url中的#history
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

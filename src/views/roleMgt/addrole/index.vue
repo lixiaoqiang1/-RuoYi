@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="app-container">
     <!-- 添加或修改参数配置对话框 -->
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-row>
@@ -149,17 +149,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title{
-    width: 100%;display: inline-block;padding: 0;margin: 0; display: inline-block;  background: #eee; padding: 0 14px; line-height: 34px;  margin-bottom: 20px;
+.app-container{
+  .title{
+      width: 100%;display: inline-block;padding: 0;margin: 0; display: inline-block;  background: #eee; padding: 0 14px; line-height: 34px;  margin-bottom: 20px;
+  }
+  .el-col-24 {
+      text-align: center;
+      .el-form-item{
+          width: 500px;display: inline-block;
+      }
+  }
+  .el-select{
+      width: 100%;
+  }
 }
-.el-col-24 {
-    text-align: center;
-    .el-form-item{
-        width: 500px;display: inline-block;
-    }
-}
-.el-select{
-    width: 100%;
-}
+
 </style>
 

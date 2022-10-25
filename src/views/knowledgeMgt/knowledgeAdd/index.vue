@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="app-container">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-row>
         <el-col :span="12">
@@ -15,8 +15,27 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="关键字" prop="guanjianzi">
-            <el-input v-model="form.guanjianzi" placeholder="请输入关键字，最多添加5个关键字且字数不能超过10个" />
+          <el-form-item label="关键字">
+            <!-- <el-input v-model="form.guanjianzi" placeholder="请输入关键字，最多添加5个关键字且字数不能超过10个" /> -->
+            <el-tag style="margin:0 5px"
+            :key="tag"
+            v-for="tag in dynamicTags"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag)">
+            {{tag}}
+          </el-tag>
+          <el-input style="margin:0 5px;width: 120px;"
+            class="input-new-tag"
+            v-if="inputVisible"
+            v-model="inputValue"
+            ref="saveTagInput"
+            size="small"
+            @keyup.enter.native="handleInputConfirm"
+            @blur="handleInputConfirm"
+          >
+          </el-input>
+          <el-button style="margin:0 5px" v-else class="button-new-tag" size="small" @click="showInput">+ 添加关键字</el-button>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -28,9 +47,10 @@
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item label="内容" prop="reason">
+          <el-form-item label="内容" prop="noticeContent">
             <!-- 富文本编辑器, 容器 -->
             <div id="J_quillEditor" class="J_quillEditor" style="height:240px"></div>
+            <!-- <editor v-model="form.noticeContent" :min-height="192"/> -->
           </el-form-item>
         </el-col>
         <el-col :span="24">
@@ -59,6 +79,7 @@
 </template>
 
 <script>
+// import Editor from '@/components/Editor';
 import Quill from "quill"; //引入模块
 import "quill/dist/quill.snow.css"; //引入样式
 import "quill/dist/quill.core.css";
@@ -66,9 +87,12 @@ import "quill/dist/quill.bubble.css";
 
 export default {
   name: "Quill",
+  // components: {
+  //   Editor
+  // },
   data() {
     return {
-      // reason: "",
+      reason: "",
       quillEditor: null,
       quillEditorToolbarOptions: [
         ["bold", "italic", "underline", "strike"],
@@ -151,6 +175,7 @@ export default {
         nickTitle: "",
         guanjianzi:"",
         zhiding:"0",
+        noticeContent:"",
         reason:"",
       },
       fileList: [
@@ -171,6 +196,11 @@ export default {
           { required: true, message: "内容不能为空", trigger: "blur" },
         ],
       },
+      dynamicTags: [
+      // '标签一', '标签二', '标签三'
+      ],
+      inputVisible: false,
+      inputValue: ''
     };
   },
   mounted() {
@@ -210,12 +240,31 @@ export default {
     submitForm() {
       console.log(this.$refs.upload.uploadFiles)
       // console.log("this.reason");
-      // console.log(this.form.reason);
+      console.log(this.form);
     },
     // 取消按钮
     cancel() {
       console.log("222");
     },
+    handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    },
+
+    showInput() {
+      this.inputVisible = true;
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.dynamicTags.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = '';
+    }
   },
 };
 </script>

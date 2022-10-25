@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       // 遮罩层
-      loading: true,
+      loading: false,
       // 选中数组
       // ids: [],
       // 非单个禁用
@@ -110,7 +110,17 @@ export default {
       // 总条数
       total: 0,
       // 用户表格数据
-      userList: null,
+      // <el-table-column label="编号" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
+      //     <el-table-column label="员工姓名" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+      //     <el-table-column label="员工号" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
+      //     <el-table-column label="角色身份" align="center" key="deptName" prop="dept.deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
+      //     <el-table-column label="二级分行" align="center" key="phonenumber" prop="phonenumber" v-if="columns[4].visible" />
+      //     <el-table-column label="一级支行" align="center" key="phonenumber5" prop="phonenumber5" v-if="columns[5].visible" />
+      //     <el-table-column label="网点名称" align="center" key="phonenumber6" prop="phonenumber6" v-if="columns[6].visible" />
+      //     <el-table-column label="网点号" align="center" key="phonenumber7" prop="phonenumber7" v-if="columns[7].visible" />
+      userList: [
+        {userId:'1',userName:'1',nickName:'1',deptName:'1',phonenumber:'1',phonenumber5:'1',phonenumber6:'1',phonenumber7:'1',}
+      ],
       // 弹出层标题
       // title: "",
       // 部门树选项
@@ -161,16 +171,6 @@ export default {
         // status: undefined,
         // deptId: undefined
       },
-      // 列信息
-// 编号
-// 员工姓名
-// 员工号
-// 角色身份
-// 二级分行
-// 一级支行
-// 网点名称
-// 网点号
-// 操作
       columns: [
         { key: 0, label: `编号`, visible: true },
         { key: 1, label: `员工姓名`, visible: true },
@@ -217,7 +217,7 @@ export default {
     // }
   },
   created() {
-    this.getList();
+    // this.getList();
     // this.getTreeselect();
     // this.getDicts("sys_normal_disable").then(response => {
     //   this.statusOptions = response.data;

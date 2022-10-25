@@ -9,3 +9,8 @@ export default  {
   name:  'App'
 }
 </script>
+<style>
+#app{
+  background: #f8f8f8;font-size: 14px;
+}
+</style>

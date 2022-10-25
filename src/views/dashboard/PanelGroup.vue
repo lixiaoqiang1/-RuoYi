@@ -55,6 +55,7 @@
   </el-row>
 </template>
 
+
 <script>
 import CountTo from 'vue-count-to'
 

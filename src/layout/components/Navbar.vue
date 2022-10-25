@@ -6,24 +6,36 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
-        
-        <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <ruo-yi-git id="ruoyi-git" class="right-menu-item hover-effect" />
+        <!-- <search id="header-search" class="right-menu-item" /> -->
+        <!-- <el-tooltip content="源码地址" effect="dark" placement="bottom">
+          <ruo-yi-git id="ruoyi-git" class="el-icon-message-solid right-menu-item hover-effect" />
         </el-tooltip>
-
         <el-tooltip content="文档地址" effect="dark" placement="bottom">
           <ruo-yi-doc id="ruoyi-doc" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+        </el-tooltip> -->
+        <!-- <screenfull id="screenfull" class="right-menu-item hover-effect" /> -->
+        <!-- <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
+        </el-tooltip> -->
 
       </template>
-
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="hover">
+        <div class="avatar-wrapper">
+          <el-badge :value="12" class="item">
+            <i class="el-icon-message-solid" />
+          </el-badge>
+        </div>
+        <el-dropdown-menu slot="dropdown">
+          
+            <el-dropdown-item v-for="item in datalist" :key="item.id">
+              <router-link :to="{name:'messagebox', query: {id:item.id}}">
+                <span style="min-width: 100px;display: inline-block;">{{ item.title }}</span>
+                (<span style="color:red">{{ item.value }}</span>)
+              </router-link>
+            </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <screenfull id="screenfull" class="right-menu-item hover-effect" />
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <img :src="avatar" class="user-avatar">
@@ -83,6 +95,18 @@ export default {
       }
     }
   },
+  data(){
+      return{
+        datalist:[
+        {id:1,title:'点赞通知',value:12},
+        {id:2,title:'转发通知',value:12},
+        {id:3,title:'收藏通知',value:12},
+        {id:4,title:'无用通知',value:12},
+        {id:5,title:'待回复建议',value:12},
+        {id:6,title:'系统通知',value:12},
+        ]
+      }
+  },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
@@ -98,6 +122,9 @@ export default {
         })
       })
     }
+
+
+    
   }
 }
 </script>
@@ -161,7 +188,7 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
-
+      
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
